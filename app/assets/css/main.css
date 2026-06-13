@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Red & Black – Stitch „Startseite (Red & Black)“ */
+  --color-primary: #8b100d;
+  --color-primary-container: #8b100d;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #ffdad5;
+  --color-secondary: #131313;
+  --color-secondary-container: #8b100d;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #ffffff;
+  --color-tertiary: #2f3131;
+  --color-tertiary-container: #434545;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #454747;
+  --color-on-tertiary-fixed-variant: #454747;
+  --color-background: #fff8f7;
+  --color-on-background: #201a19;
+  --color-surface: #fff8f7;
+  --color-on-surface: #201a19;
+  --color-on-surface-variant: #857371;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #fff1ef;
+  --color-surface-container: #fceae8;
+  --color-surface-container-high: #f5dedb;
+  --color-surface-container-highest: #f9dad5;
+  --color-outline: #857371;
+  --color-outline-variant: #d8c2bf;
+  --color-error: #ba1a1a;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-secondary-fixed-dim: #c6c6c7;
+  --color-surface-tint: #8b100d;
+
+  --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --spacing-gutter: 24px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 32px;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-background font-body antialiased;
+  }
+
+  a {
+    @apply text-primary transition-colors duration-200 hover:text-secondary;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-10;
+  }
+
+  .hero-clip {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+
+  .diagonal-clip {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+
+  .asymmetric-border {
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .btn-primary {
+    @apply rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-on-primary no-underline transition-all duration-200 hover:brightness-110 active:scale-95;
+  }
+
+  .btn-accent {
+    @apply rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-on-primary no-underline transition-all duration-200 hover:brightness-110 active:scale-95;
+  }
+
+  .btn-outline {
+    @apply rounded-lg border-2 border-on-primary bg-transparent px-6 py-2.5 text-sm font-semibold text-on-primary no-underline transition-all duration-200 hover:bg-white/10 active:scale-95;
+  }
+
+  .section-heading {
+    @apply flex items-center gap-2 font-display text-2xl font-bold text-secondary md:text-[32px];
+  }
+
+  .section-heading-bar {
+    @apply inline-block h-1 w-8 bg-primary;
+  }
+
+  .card-surface {
+    @apply rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm;
+  }
+
+  .match-stripe {
+    @apply absolute top-0 bottom-0 left-0 w-1.5 bg-primary;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

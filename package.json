@@ -1,0 +1,25 @@
+{
+  "name": "Danninger",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "directus:up": "docker compose up -d",
+    "directus:down": "docker compose down",
+    "directus:logs": "docker compose logs -f directus",
+    "directus:setup": "node scripts/setup-directus.mjs",
+    "directus:seed": "node scripts/seed-directus.mjs"
+  },
+  "dependencies": {
+    "@directus/sdk": "^21.3.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "nuxt": "^4.4.7",
+    "tailwindcss": "^4.3.0",
+    "vue": "^3.5.35",
+    "vue-router": "^5.1.0"
+  }
+}
