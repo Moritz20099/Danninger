@@ -19,19 +19,19 @@ function handleSubmit() {
 
 <template>
   <div>
-    <section class="diagonal-clip bg-primary-container py-16 md:py-20">
+    <section data-gsap="page-head" class="diagonal-clip bg-primary-container py-16 md:py-20">
       <div class="container-site">
-        <h1 class="font-display text-4xl font-extrabold text-on-primary md:text-5xl">
+        <h1 data-gsap="page-head-item" class="font-display text-4xl font-extrabold text-on-primary md:text-5xl">
           Kontakt
         </h1>
-        <p class="mt-3 max-w-2xl text-lg text-on-primary-container">
+        <p data-gsap="page-head-item" class="mt-3 max-w-2xl text-lg text-on-primary-container">
           Schreib uns eine Nachricht – wir melden uns so schnell wie möglich zurück.
         </p>
       </div>
     </section>
 
     <div class="container-site py-12">
-      <div class="grid gap-10 lg:grid-cols-2">
+      <div data-gsap="stagger" class="grid gap-10 lg:grid-cols-2">
         <form class="card-surface p-6 sm:p-8" @submit.prevent="handleSubmit">
           <div class="space-y-5">
             <div>

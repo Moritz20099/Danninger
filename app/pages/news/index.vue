@@ -4,16 +4,22 @@ useHead({
 })
 
 const { data: news, pending, error } = useAllNews()
+
+watch(pending, (isPending) => {
+  if (!isPending) {
+    refreshPageAnimations()
+  }
+})
 </script>
 
 <template>
   <div>
-    <section class="diagonal-clip bg-primary-container py-16 md:py-20">
+    <section data-gsap="page-head" class="diagonal-clip bg-primary-container py-16 md:py-20">
       <div class="container-site">
-        <h1 class="font-display text-4xl font-extrabold text-on-primary md:text-5xl">
+        <h1 data-gsap="page-head-item" class="font-display text-4xl font-extrabold text-on-primary md:text-5xl">
           News
         </h1>
-        <p class="mt-3 max-w-2xl text-lg text-on-primary-container">
+        <p data-gsap="page-head-item" class="mt-3 max-w-2xl text-lg text-on-primary-container">
           Alle Meldungen und Updates aus dem Vereinsleben.
         </p>
       </div>
@@ -28,7 +34,7 @@ const { data: news, pending, error } = useAllNews()
         News konnten nicht geladen werden. Bitte Directus-URL und Berechtigungen prüfen.
       </div>
 
-      <div v-else-if="news?.length" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div v-else-if="news?.length" data-gsap="stagger" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <NewsCard v-for="post in news" :key="post.id" :post="post" />
       </div>
 

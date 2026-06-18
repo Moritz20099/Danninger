@@ -47,11 +47,17 @@ const imageUrl = useDirectusAsset(
   () => (isCurrentPost.value ? post.value?.image : null),
   { width: 1200, height: 630, fit: 'cover', quality: 85 },
 )
+
+watch(isLoading, (loading) => {
+  if (!loading) {
+    refreshPageAnimations()
+  }
+})
 </script>
 
 <template>
   <div>
-    <section class="bg-surface-container-low py-8">
+    <section data-gsap="fade-up" class="bg-surface-container-low py-8">
       <div class="container-site">
         <NuxtLink
           to="/news"
@@ -76,7 +82,7 @@ const imageUrl = useDirectusAsset(
         Beitrag konnte nicht geladen werden.
       </div>
 
-      <article v-else-if="post && isCurrentPost" :key="slug">
+      <article v-else-if="post && isCurrentPost" :key="slug" data-gsap="fade-up">
         <img
           v-if="imageUrl"
           :src="imageUrl"

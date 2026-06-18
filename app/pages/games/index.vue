@@ -4,16 +4,22 @@ useHead({
 })
 
 const { data: games, pending, error } = useUpcomingGames()
+
+watch(pending, (isPending) => {
+  if (!isPending) {
+    refreshPageAnimations()
+  }
+})
 </script>
 
 <template>
   <div>
-    <section class="diagonal-clip bg-primary-container py-16 md:py-20">
+    <section data-gsap="page-head" class="diagonal-clip bg-primary-container py-16 md:py-20">
       <div class="container-site">
-        <h1 class="font-display text-4xl font-extrabold text-on-primary md:text-5xl">
+        <h1 data-gsap="page-head-item" class="font-display text-4xl font-extrabold text-on-primary md:text-5xl">
           Spiele
         </h1>
-        <p class="mt-3 max-w-2xl text-lg text-on-primary-container">
+        <p data-gsap="page-head-item" class="mt-3 max-w-2xl text-lg text-on-primary-container">
           Alle anstehenden Spiele und Termine auf einen Blick.
         </p>
       </div>
@@ -28,7 +34,7 @@ const { data: games, pending, error } = useUpcomingGames()
         Spieltermine konnten nicht geladen werden. Bitte Directus-URL und Berechtigungen prüfen.
       </div>
 
-      <div v-else-if="games?.length" class="flex flex-col gap-4">
+      <div v-else-if="games?.length" data-gsap="stagger" class="flex flex-col gap-4">
         <GameCard
           v-for="game in games"
           :key="game.id"

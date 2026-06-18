@@ -104,7 +104,7 @@ const excerpt = computed(() => {
   <NuxtLink
     v-else
     :to="postLink"
-    class="group flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm no-underline transition-all hover:border-primary hover:shadow-md"
+    class="group flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm no-underline transition-[border-color,box-shadow] hover:border-primary hover:shadow-md"
   >
     <img
       v-if="imageUrl"

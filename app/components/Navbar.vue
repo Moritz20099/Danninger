@@ -1,6 +1,9 @@
 <script setup>
 const route = useRoute()
+const headerRef = ref(null)
 const mobileMenuOpen = ref(false)
+
+useNavbarAnimation(headerRef, mobileMenuOpen)
 
 const links = [
   { label: 'Home', to: '/' },
@@ -25,6 +28,9 @@ watch(
   () => route.path,
   () => {
     mobileMenuOpen.value = false
+    if (import.meta.client) {
+      document.body.style.overflow = ''
+    }
   },
 )
 
@@ -44,7 +50,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 border-b border-outline-variant bg-surface shadow-sm">
+  <header ref="headerRef" class="site-header sticky top-0 z-50 border-b border-outline-variant bg-surface shadow-sm">
     <nav class="container-site flex items-center justify-between py-4">
       <NuxtLink
         to="/"
@@ -123,7 +129,7 @@ onUnmounted(() => {
               v-for="link in links"
               :key="link.to"
               :to="link.to"
-              class="w-full max-w-sm rounded-xl px-6 py-4 text-center text-2xl font-semibold no-underline transition-colors"
+              class="mobile-nav-link w-full max-w-sm rounded-xl px-6 py-4 text-center text-2xl font-semibold no-underline transition-colors"
               :class="isActive(link.to)
                 ? 'bg-primary text-on-primary'
                 : 'text-on-secondary hover:bg-tertiary'"

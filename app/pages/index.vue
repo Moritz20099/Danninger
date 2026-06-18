@@ -11,13 +11,19 @@ const { data: games, pending: gamesPending, error: gamesError } = useUpcomingGam
 
 const featuredNews = computed(() => news.value?.[0] || null)
 const otherNews = computed(() => news.value?.slice(1) || [])
+
+watch([newsPending, gamesPending], ([newsLoading, gamesLoading]) => {
+  if (!newsLoading && !gamesLoading) {
+    refreshPageAnimations()
+  }
+})
 </script>
 
 <template>
   <div>
     <!-- Hero -->
-    <header class="hero-clip relative h-[min(870px,90vh)] w-full overflow-hidden bg-black">
-      <div class="absolute inset-0 z-0">
+    <header data-gsap="home-hero" class="hero-clip relative h-[min(870px,90vh)] w-full overflow-hidden bg-black">
+      <div data-gsap="hero-bg" class="absolute inset-0 z-0 overflow-hidden">
         <img
           :src="heroImage"
           alt="Volleyball-Aktion"
@@ -27,19 +33,19 @@ const otherNews = computed(() => news.value?.slice(1) || [])
       <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/80 to-transparent" />
 
       <div class="container-site relative z-20 flex h-full flex-col items-start justify-center pb-24">
-        <div class="mb-4 inline-block rounded-sm bg-primary px-3 py-1 text-xs font-semibold tracking-wider text-on-primary uppercase">
+        <div data-gsap="hero-item" class="mb-4 inline-block rounded-sm bg-primary px-3 py-1 text-xs font-semibold tracking-wider text-on-primary uppercase">
           Seit 1985
         </div>
 
-        <h1 class="max-w-3xl font-display text-4xl leading-tight font-extrabold tracking-tight text-on-primary md:text-5xl">
+        <h1 data-gsap="hero-item" class="max-w-3xl font-display text-4xl leading-tight font-extrabold tracking-tight text-on-primary md:text-5xl">
           Präzision, Power &amp; Teamgeist auf dem Court
         </h1>
 
-        <p class="mt-4 max-w-xl text-lg text-surface-container-highest">
+        <p data-gsap="hero-item" class="mt-4 max-w-xl text-lg text-surface-container-highest">
           Willkommen beim SV Danninger – aktuelle News, Spieltermine und alles Wichtige rund um unseren Volleyballverein.
         </p>
 
-        <div class="mt-8 flex flex-wrap gap-6">
+        <div data-gsap="hero-item" class="mt-8 flex flex-wrap gap-6">
           <NuxtLink to="/contact" class="btn-accent px-8 py-4 text-base">
             Mitglied werden
           </NuxtLink>
@@ -51,7 +57,7 @@ const otherNews = computed(() => news.value?.slice(1) || [])
     </header>
 
     <!-- News Bento -->
-    <section class="container-site relative z-30 -mt-24 py-8">
+    <section data-gsap="fade-up" class="container-site relative z-30 -mt-24 py-8">
       <div class="mb-8 flex items-end justify-between gap-4">
         <h2 class="section-heading">
           <span class="section-heading-bar" />
@@ -74,7 +80,7 @@ const otherNews = computed(() => news.value?.slice(1) || [])
         News konnten nicht geladen werden.
       </div>
 
-      <div v-else-if="news?.length" class="grid gap-6 md:grid-cols-12">
+      <div v-else-if="news?.length" data-gsap="stagger" class="grid gap-6 md:grid-cols-12">
         <div v-if="featuredNews" class="md:col-span-7">
           <NewsCard :post="featuredNews" variant="featured" />
         </div>
@@ -113,7 +119,7 @@ const otherNews = computed(() => news.value?.slice(1) || [])
     <!-- Upcoming Games -->
     <section class="overflow-hidden bg-surface-container-low py-12">
       <div class="container-site">
-        <h2 class="section-heading mb-8 text-center md:text-left">
+        <h2 data-gsap="fade-up" class="section-heading mb-8 text-center md:text-left">
           <span class="section-heading-bar" />
           Nächste Spiele
         </h2>
@@ -126,7 +132,7 @@ const otherNews = computed(() => news.value?.slice(1) || [])
           Spieltermine konnten nicht geladen werden.
         </div>
 
-        <div v-else-if="games?.length" class="flex flex-col gap-4">
+        <div v-else-if="games?.length" data-gsap="stagger" class="flex flex-col gap-4">
           <GameCard
             v-for="game in games"
             :key="game.id"
@@ -139,7 +145,7 @@ const otherNews = computed(() => news.value?.slice(1) || [])
           Kein anstehendes Spiel vorhanden.
         </div>
 
-        <div v-if="games?.length" class="mt-8 text-center md:text-left">
+        <div v-if="games?.length" data-gsap="fade-up" class="mt-8 text-center md:text-left">
           <NuxtLink to="/games" class="inline-flex items-center gap-1 text-sm font-semibold text-primary no-underline uppercase hover:underline">
             Alle Spiele
             <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -154,7 +160,7 @@ const otherNews = computed(() => news.value?.slice(1) || [])
 
       <div class="container-site relative z-10">
         <div class="grid items-center gap-16 lg:grid-cols-2">
-          <div>
+          <div data-gsap="fade-up">
             <h2 class="mb-4 font-display text-3xl font-bold text-primary md:text-4xl">
               Präzision, Leistung &amp; Vereinsstolz
             </h2>
@@ -162,28 +168,28 @@ const otherNews = computed(() => news.value?.slice(1) || [])
               Der SV Danninger ist mehr als ein Volleyballverein – wir sind eine Gemeinschaft, die Technik, Taktik und Teamgeist verbindet. Seit unserer Gründung fördern wir Athletinnen und Athleten jeden Alters auf und neben dem Court.
             </p>
 
-            <div class="grid grid-cols-2 gap-8">
+            <div data-gsap="stagger" class="grid grid-cols-2 gap-8">
               <div class="asymmetric-border pl-4">
-                <span class="block font-display text-4xl font-extrabold text-primary">3</span>
+                <span data-gsap="counter" data-count="3" class="block font-display text-4xl font-extrabold text-primary">3</span>
                 <span class="text-xs font-semibold tracking-widest text-on-tertiary-fixed-variant uppercase">Mannschaften</span>
               </div>
               <div class="asymmetric-border pl-4">
-                <span class="block font-display text-4xl font-extrabold text-primary">80+</span>
+                <span data-gsap="counter" data-count="80" data-suffix="+" class="block font-display text-4xl font-extrabold text-primary">80+</span>
                 <span class="text-xs font-semibold tracking-widest text-on-tertiary-fixed-variant uppercase">Mitglieder</span>
               </div>
               <div class="asymmetric-border pl-4">
-                <span class="block font-display text-4xl font-extrabold text-primary">2×</span>
+                <span data-gsap="counter" data-count="2" data-suffix="×" class="block font-display text-4xl font-extrabold text-primary">2×</span>
                 <span class="text-xs font-semibold tracking-widest text-on-tertiary-fixed-variant uppercase">Training / Woche</span>
               </div>
               <div class="asymmetric-border pl-4">
-                <span class="block font-display text-4xl font-extrabold text-primary">40</span>
+                <span data-gsap="counter" data-count="40" class="block font-display text-4xl font-extrabold text-primary">40</span>
                 <span class="text-xs font-semibold tracking-widest text-on-tertiary-fixed-variant uppercase">Jahre Tradition</span>
               </div>
             </div>
           </div>
 
-          <div class="relative">
-            <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+          <div data-gsap="fade-up" class="relative">
+            <div data-gsap="parallax" class="relative overflow-hidden rounded-2xl shadow-2xl">
               <img
                 :src="aboutImage"
                 alt="Training beim SV Danninger"
@@ -206,7 +212,7 @@ const otherNews = computed(() => news.value?.slice(1) || [])
     </section>
 
     <!-- CTA -->
-    <section class="relative overflow-hidden bg-secondary py-16">
+    <section data-gsap="fade-up" class="relative overflow-hidden bg-secondary py-16">
       <div class="pointer-events-none absolute inset-0 opacity-10" aria-hidden="true">
         <div class="grid h-full grid-cols-6 gap-4">
           <div v-for="n in 6" :key="n" class="rotate-12 border-r border-white" />

@@ -4,7 +4,7 @@
  */
 
 const DIRECTUS_URL = process.env.DIRECTUS_URL || 'http://localhost:8055'
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'moritzguenther20099@gmail.com'
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'directus'
 
 async function api(path, { method = 'GET', token, body } = {}) {

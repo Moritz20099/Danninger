@@ -50,6 +50,38 @@
   a {
     @apply text-primary transition-colors duration-200 hover:text-secondary;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    [data-gsap='stagger'] > *:not([data-gsap-ready]),
+    [data-gsap='page-head']:not([data-gsap-ready]) [data-gsap='page-head-item']:not([data-gsap-ready]),
+    [data-gsap='home-hero']:not([data-gsap-ready]) [data-gsap='hero-item']:not([data-gsap-ready]),
+    [data-gsap='fade-up']:not([data-gsap-ready]) {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Versteckt bis GSAP einblendet – transition:none damit CSS nicht mit GSAP kämpft */
+  [data-gsap='stagger'] > *:not([data-gsap-ready]),
+  [data-gsap='page-head'] [data-gsap='page-head-item']:not([data-gsap-ready]),
+  [data-gsap='home-hero'] [data-gsap='hero-item']:not([data-gsap-ready]),
+  [data-gsap='fade-up']:not([data-gsap-ready]) {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: none !important;
+  }
+
+  [data-gsap='home-hero'] [data-gsap='hero-item']:not([data-gsap-ready]) {
+    transform: translateY(52px);
+  }
+
+  [data-gsap='fade-up']:not([data-gsap-ready]) {
+    transform: translateY(44px);
+  }
 }
 
 @layer components {
